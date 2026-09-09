@@ -226,6 +226,9 @@ section.block{padding:26px 0}
 .venue-hotel{margin-top:22px;font-family:var(--kai);font-size:25px;letter-spacing:.14em;color:var(--ink)}
 .venue-hall{margin-top:5px;font-size:13.5px;letter-spacing:.2em;color:var(--rose)}
 .venue-addr{margin-top:10px;font-size:13.5px;line-height:1.8;color:var(--ink-soft)}
+.pre-note{margin-top:20px;padding:16px 14px 14px;border-top:1px dashed rgba(201,160,99,.45)}
+.pre-note .pt{font-family:var(--kai);font-size:15.5px;letter-spacing:.18em;color:var(--rose-deep)}
+.pre-note .pd{margin-top:6px;font-size:13px;letter-spacing:.05em;color:var(--ink-soft);line-height:1.9}
 .map-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
 .btn{
   display:flex;align-items:center;justify-content:center;gap:7px;
@@ -388,6 +391,7 @@ section.block{padding:26px 0}
       <div class="venue-hotel" id="i-hotel"></div>
       <div class="venue-hall" id="i-hall"></div>
       <div class="venue-addr" id="i-addr"></div>
+      <div class="pre-note" id="i-pre"></div>
       <div class="map-btns">
         <a class="btn btn-solid" id="i-map-amap" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
@@ -464,6 +468,8 @@ $('#i-vsub').innerHTML = `${WEDDING.weekday} · ${WEDDING.lunarLine} · <b>${WED
 $('#i-hotel').textContent = WEDDING.hotel;
 $('#i-hall').textContent = WEDDING.hall;
 $('#i-addr').textContent = WEDDING.address;
+const PB = WEDDING.preBanquet;
+if (PB) $('#i-pre').innerHTML = `<div class="pt">提前相聚 · ${PB.title}</div><div class="pd">${PB.date}（${PB.weekday}）${PB.time}<br>${WEDDING.hotel} ${PB.hall} · 与正席同一酒店</div>`;
 $('#i-map-amap').href = WEDDING.mapAmap;
 $('#i-map-tx').href = WEDDING.mapTencent;
 $('#i-fnames').innerHTML = `${WEDDING.groom}<span>♥</span>${WEDDING.bride}`;
