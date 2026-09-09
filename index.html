@@ -460,8 +460,9 @@ $('#i-story').innerHTML = WEDDING.story.map(p => `
   const PB = WEDDING.preBanquet;
   const m = PB.date.match(/^(\d{4})年(\d{1,2})月(\d{1,2})日$/);
   const days = [];
-  if (PB) days.push({ d1: `${String(+m[2])}.${String(+m[3])}`, d2: PB.weekday, t1: `${PB.title} · <b>${PB.time}</b>`, t2: `${WEDDING.hotel} ${PB.hall}` });
-  days.push({ d1: '10.1', d2: WEDDING.weekday, t1: `婚礼正席 · 典礼 <b>${WEDDING.timeLine}</b>`, t2: `${WEDDING.hotel} ${WEDDING.hall}` });
+  const flat = s => s.replace(/ · /g, '');
+  if (PB) days.push({ d1: `${String(+m[2])}.${String(+m[3])}`, d2: PB.weekday, t1: `${PB.title} · <b>${PB.time}</b>`, t2: `${WEDDING.hotel} ${flat(PB.hall)}` });
+  days.push({ d1: '10.1', d2: WEDDING.weekday, t1: `婚礼正席 · 典礼 <b>${WEDDING.timeLine}</b>`, t2: `${WEDDING.hotel} ${flat(WEDDING.hall)}` });
   $('#i-days').innerHTML = days.map(d => `
     <div class="day">
       <div class="dt2"><div class="d1">${d.d1}</div><div class="d2">${d.d2}</div></div>
