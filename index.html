@@ -171,36 +171,39 @@ section.block{padding:26px 0}
 .cd-note{margin-top:18px;font-size:13px;letter-spacing:.1em;color:var(--ink-soft)}
 .cd-note b{color:var(--rose-deep);font-weight:600}
 
-/* 照片墙 */
-.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px}
-.ph-item{position:relative}
-.ph-item:nth-child(odd){transform:rotate(-1.6deg)}
-.ph-item:nth-child(even){transform:rotate(1.6deg) translateY(10px)}
-.ph-frame{
-  position:relative;background:#FFFDFB;padding:8px 8px 12px;
+/* 照片故事长廊 */
+.story{display:flex;flex-direction:column;gap:36px}
+.st-item{width:90%}
+.st-item:nth-child(even){margin-left:auto;transform:rotate(1.1deg)}
+.st-item:nth-child(odd){transform:rotate(-1.1deg)}
+.st-frame{
+  position:relative;background:#FFFDFB;padding:8px 8px 11px;
   border:1px solid rgba(201,160,99,.4);border-radius:6px;
-  box-shadow:0 10px 26px rgba(161,78,102,.14);
+  box-shadow:0 12px 30px rgba(161,78,102,.14);
 }
-.tape{
-  position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-3deg);
-  width:58px;height:18px;border-radius:2px;
-  background:linear-gradient(180deg,rgba(242,196,204,.75),rgba(242,196,204,.55));
-  box-shadow:0 1px 3px rgba(161,78,102,.15);
-  z-index:2;
+.st-frame .ph{position:relative;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#F7E3E0,#EFD2D4);height:300px}
+.st-frame .ph.wide{height:226px}
+.st-frame .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.st-cap{margin-top:11px;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.st-cap .lb{font-family:var(--kai);font-size:15.5px;color:var(--rose-deep);letter-spacing:.06em;white-space:nowrap}
+.st-cap .lb b{color:var(--gold-deep);font-weight:600;margin-right:6px}
+.st-cap .nt{font-size:11px;color:var(--ink-soft);letter-spacing:.03em;text-align:right}
+.story-intro{margin:-6px 0 22px;font-size:12.5px;letter-spacing:.14em;color:var(--ink-soft)}
+
+/* 两日宴席 */
+.days{display:flex;flex-direction:column;gap:14px;text-align:left}
+.day{
+  display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;
+  background:linear-gradient(180deg,#FFF9F5,#FAECE7);
+  border:1px solid rgba(201,160,99,.45);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.55);
 }
-.ph-item:nth-child(even) .tape{transform:translateX(-50%) rotate(3deg)}
-.ph-img{position:relative;aspect-ratio:4/5;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#F7E3E0,#EFD2D4)}
-.ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
-.ph-img img.ok{opacity:1}
-.ph-fallback{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:8px;
-}
-.ph-fallback svg{width:62%;height:auto}
-.ph-fallback .hint{font-size:10px;letter-spacing:.18em;color:var(--gold-deep);opacity:.85}
-.ph-cap{margin-top:12px}
-.ph-cap .lb{font-family:var(--kai);font-size:15.5px;color:var(--rose-deep);letter-spacing:.1em}
-.ph-cap .nt{margin-top:3px;font-size:11.5px;color:var(--ink-soft);letter-spacing:.06em}
+.day .dt2{min-width:74px;text-align:center;padding-right:14px;border-right:1px solid rgba(201,160,99,.35)}
+.day .dt2 .d1{font-family:var(--latin);font-size:26px;font-weight:600;color:var(--gold-deep);line-height:1.1}
+.day .dt2 .d2{font-size:11.5px;color:var(--ink-soft);letter-spacing:.1em;margin-top:3px}
+.day .di .t1{font-family:var(--kai);font-size:17px;letter-spacing:.08em;color:var(--ink)}
+.day .di .t1 b{color:var(--rose-deep);font-weight:600}
+.day .di .t2{margin-top:4px;font-size:12.5px;color:var(--ink-soft);letter-spacing:.05em}
 
 /* 流程时间线 */
 .tl{position:relative;text-align:left;padding-left:6px}
@@ -366,11 +369,12 @@ section.block{padding:26px 0}
     </div>
   </section>
 
-  <!-- ═══ 照片墙 ═══ -->
+  <!-- ═══ 我们的故事 ═══ -->
   <section class="block">
     <div class="card reveal">
       <div class="card-kicker"><span class="ln"></span><span class="tt">我们的故事</span><span class="ln r"></span></div>
-      <div class="gal-grid" id="i-gallery"></div>
+      <div class="story-intro">十个瞬间，一生收藏</div>
+      <div class="story" id="i-story"></div>
     </div>
   </section>
 
@@ -379,6 +383,15 @@ section.block{padding:26px 0}
     <div class="card reveal">
       <div class="card-kicker"><span class="ln"></span><span class="tt">婚礼流程</span><span class="ln r"></span></div>
       <div class="tl" id="i-timeline"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 两日宴席 ═══ -->
+  <section class="block">
+    <div class="card reveal">
+      <div class="card-kicker"><span class="ln"></span><span class="tt">两日宴席</span><span class="ln r"></span></div>
+      <div class="days" id="i-days"></div>
+      <div class="cd-note" style="margin-top:16px" id="i-daysnote"></div>
     </div>
   </section>
 
@@ -391,7 +404,6 @@ section.block{padding:26px 0}
       <div class="venue-hotel" id="i-hotel"></div>
       <div class="venue-hall" id="i-hall"></div>
       <div class="venue-addr" id="i-addr"></div>
-      <div class="pre-note" id="i-pre"></div>
       <div class="map-btns">
         <a class="btn btn-solid" id="i-map-amap" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
@@ -434,26 +446,29 @@ $('#i-herodate').innerHTML = `<b>${WEDDING.dateLine}</b>　${WEDDING.weekday} ·
 $('#i-invite').innerHTML = WEDDING.inviteLines.map(l => `<p>${l}</p>`).join('');
 $('#i-sign').textContent = `—— ${WEDDING.groom} & ${WEDDING.bride} 敬上`;
 
-/* 照片墙 */
-$('#i-gallery').innerHTML = WEDDING.photos.map((p, i) => `
-  <div class="ph-item">
-    <div class="ph-frame">
-      <div class="tape"></div>
-      <div class="ph-img">
-        <div class="ph-fallback">
-          <svg viewBox="-40 -46 80 92"><g transform="translate(0,4)"><g fill="rgba(196,115,138,.15)" stroke="#C4738A" stroke-width="1.4"><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(0)"/><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(60)"/><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(120)"/><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(180)"/><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(240)"/><path d="M0 0 C -9 -12 -7 -30 0 -36 C 7 -30 9 -12 0 0 Z" transform="rotate(300)"/></g><circle r="5" fill="#D08297" stroke="#A14E66"/></g></svg>
-          <div class="hint">婚纱照 ${p.src}</div>
-        </div>
-        <img alt="${p.label}" src="${p.src}">
-      </div>
+/* 照片故事长廊（10张精修） */
+$('#i-story').innerHTML = WEDDING.story.map(p => `
+  <div class="st-item">
+    <div class="st-frame">
+      <div class="ph${p.wide ? ' wide' : ''}"><img loading="lazy" alt="${p.title}" src="${p.src}" style="object-position:${p.pos || '50% 20%'}"></div>
+      <div class="st-cap"><div class="lb"><b>${p.chapter}</b>${p.title}</div><div class="nt">${p.note}</div></div>
     </div>
-    <div class="ph-cap"><div class="lb">${p.label}</div><div class="nt">${p.note}</div></div>
   </div>`).join('');
 
-document.querySelectorAll('.ph-img img').forEach(img => {
-  img.onload  = () => { img.previousElementSibling.remove(); img.classList.add('ok'); };
-  img.onerror = () => img.remove();   // 没照片就保留花卉占位插画
-});
+/* 两日宴席 */
+(function () {
+  const PB = WEDDING.preBanquet;
+  const m = PB.date.match(/^(\d{4})年(\d{1,2})月(\d{1,2})日$/);
+  const days = [];
+  if (PB) days.push({ d1: `${String(+m[2])}.${String(+m[3])}`, d2: PB.weekday, t1: `${PB.title} · <b>${PB.time}</b>`, t2: `${WEDDING.hotel} ${PB.hall}` });
+  days.push({ d1: '10.1', d2: WEDDING.weekday, t1: `婚礼正席 · 典礼 <b>${WEDDING.timeLine}</b>`, t2: `${WEDDING.hotel} ${WEDDING.hall}` });
+  $('#i-days').innerHTML = days.map(d => `
+    <div class="day">
+      <div class="dt2"><div class="d1">${d.d1}</div><div class="d2">${d.d2}</div></div>
+      <div class="di"><div class="t1">${d.t1}</div><div class="t2">${d.t2}</div></div>
+    </div>`).join('');
+  $('#i-daysnote').innerHTML = `两天均在<b>${WEDDING.hotel}</b>，导航见下方地图按钮`;
+})();
 
 /* 时间线 */
 $('#i-timeline').innerHTML = WEDDING.timeline.map(t => `
@@ -468,8 +483,6 @@ $('#i-vsub').innerHTML = `${WEDDING.weekday} · ${WEDDING.lunarLine} · <b>${WED
 $('#i-hotel').textContent = WEDDING.hotel;
 $('#i-hall').textContent = WEDDING.hall;
 $('#i-addr').textContent = WEDDING.address;
-const PB = WEDDING.preBanquet;
-if (PB) $('#i-pre').innerHTML = `<div class="pt">提前相聚 · ${PB.title}</div><div class="pd">${PB.date.replace('2026年','')}（${PB.weekday}）${PB.time} · 二楼东厅嘉福厅<br>${WEDDING.hotel}（与正席同酒店）</div>`;
 $('#i-map-amap').href = WEDDING.mapAmap;
 $('#i-map-tx').href = WEDDING.mapTencent;
 $('#i-fnames').innerHTML = `${WEDDING.groom}<span>♥</span>${WEDDING.bride}`;
