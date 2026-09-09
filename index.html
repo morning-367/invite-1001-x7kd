@@ -469,7 +469,7 @@ $('#i-hotel').textContent = WEDDING.hotel;
 $('#i-hall').textContent = WEDDING.hall;
 $('#i-addr').textContent = WEDDING.address;
 const PB = WEDDING.preBanquet;
-if (PB) $('#i-pre').innerHTML = `<div class="pt">提前相聚 · ${PB.title}</div><div class="pd">${PB.date}（${PB.weekday}）${PB.time}<br>${WEDDING.hotel} ${PB.hall} · 与正席同一酒店</div>`;
+if (PB) $('#i-pre').innerHTML = `<div class="pt">提前相聚 · ${PB.title}</div><div class="pd">${PB.date}（${PB.weekday}）${PB.time} · ${PB.hall}<br>${WEDDING.hotel} · 与正席同酒店</div>`;
 $('#i-map-amap').href = WEDDING.mapAmap;
 $('#i-map-tx').href = WEDDING.mapTencent;
 $('#i-fnames').innerHTML = `${WEDDING.groom}<span>♥</span>${WEDDING.bride}`;
