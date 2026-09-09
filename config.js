@@ -21,6 +21,8 @@ const WEDDING = {
   inviteLines: [
     "见字如面，展信舒颜。",
     "我们相识于人间烟火，相守于岁月平常。",
+    "从一次回眸到朝朝暮暮，感谢岁月把我们安排在一起。",
+    "如今，我们决定把余生郑重地交给彼此。",
     "兹定于十月一日国庆佳节，为爱设宴。",
     "恭请拨冗莅临，见证我们的幸福时刻。",
   ],
@@ -51,11 +53,19 @@ const WEDDING = {
   mapAmap:  "https://uri.amap.com/search?keyword=怀仁市金沙嘉和酒店&src=wedding", // 高德地图
   mapTencent: "https://map.qq.com/search/怀仁市金沙嘉和酒店",                     // 腾讯地图
 
-  /* ---- 照片展示（H5 照片墙，photos 文件夹里的 1.jpg ~ 4.jpg） ---- */
-  photos: [
-    { src: "photos/1.jpg", label: "壹 · 初遇", note: "人海茫茫，恰好遇见你" },
-    { src: "photos/2.jpg", label: "贰 · 相恋", note: "从此晚风都是甜的" },
-    { src: "photos/3.jpg", label: "叁 · 同行", note: "把日子过成想要的样子" },
-    { src: "photos/4.jpg", label: "肆 · 余生", note: "往后余生，请多指教" },
+  /* ---- 照片故事（H5「我们的故事」板块，10张精修全收录） ----
+     src 对应 photos-web 文件夹里的文件；wide=true 表示横幅照片；
+     想改文案直接改引号里的字，想换照片就换 src 的文件名。 */
+  story: [
+    { src: "photos-web/h5-01.jpg", chapter: "壹", title: "十里红妆", note: "凤冠霞帔，佳偶天成", pos: "42% 26%", wide: true },
+    { src: "photos-web/h5-02.jpg", chapter: "贰", title: "小惊喜", note: "蒙住眼睛的这一刻，往后全是惊喜", pos: "50% 18%" },
+    { src: "photos-web/h5-03.jpg", chapter: "叁", title: "牵手", note: "牵着你的手，走过春夏秋冬", pos: "50% 24%", wide: true },
+    { src: "photos-web/h5-04.jpg", chapter: "肆", title: "花开", note: "漫山花开，只等你来", pos: "50% 10%" },
+    { src: "photos-web/h5-05.jpg", chapter: "伍", title: "初吻", note: "草坪上的风，都是甜的", pos: "50% 16%" },
+    { src: "photos-web/h5-06.jpg", chapter: "陆", title: "纯白", note: "一生一次，一纱一世", pos: "50% 22%", wide: true },
+    { src: "photos-web/h5-07.jpg", chapter: "柒", title: "回眸", note: "这一眼，便是一生", pos: "50% 26%" },
+    { src: "photos-web/h5-08.jpg", chapter: "捌", title: "掀纱", note: "为你掀起头纱的那一刻", pos: "50% 18%" },
+    { src: "photos-web/h5-09.jpg", chapter: "玖", title: "同框", note: "如一幅旧画，我们终于同框", pos: "50% 16%" },
+    { src: "photos-web/h5-10.jpg", chapter: "拾", title: "余生", note: "往后余生，请多指教", pos: "50% 20%" },
   ],
 };
