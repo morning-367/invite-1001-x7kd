@@ -19,7 +19,7 @@ const WEDDING = {
 
   /* ---- 首页合照与背景音乐 ---- */
   heroPhoto: { src: "photos-web/h5-09.jpg", pos: "50% 22%" },  // 首页拱门里的合照（油画正面照，可换其他 h5-XX）
-  bgm: "",                                                      // 背景音乐：下载好 mp3 放进 assets 文件夹，这里填 "assets/bgm.mp3"（留空则不显示音乐按钮）
+  bgm: "assets/bgm.mp3",                                        // 背景音乐：River Flows in You（Yiruma）
 
   /* ---- 邀请语（每行一句，可自行增删） ---- */
   inviteLines: [
