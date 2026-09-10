@@ -69,7 +69,6 @@ const WEDDING = {
     { src: "photos-web/h5-06.jpg", chapter: "陆", title: "纯白", note: "一生一次，一纱一世", pos: "50% 22%", wide: true },
     { src: "photos-web/h5-07.jpg", chapter: "柒", title: "回眸", note: "这一眼，便是一生", pos: "50% 26%" },
     { src: "photos-web/h5-08.jpg", chapter: "捌", title: "掀纱", note: "为你掀起头纱的那一刻", pos: "50% 18%" },
-    { src: "photos-web/h5-09.jpg", chapter: "玖", title: "同框", note: "如一幅旧画，我们终于同框", pos: "50% 16%" },
-    { src: "photos-web/h5-10.jpg", chapter: "拾", title: "余生", note: "往后余生，请多指教", pos: "50% 20%" },
+    { src: "photos-web/h5-10.jpg", chapter: "玖", title: "余生", note: "往后余生，请多指教", pos: "50% 20%" },
   ],
 };
