@@ -97,7 +97,7 @@ img{display:block;max-width:100%}
   font-family:var(--latin);font-size:11px;letter-spacing:.42em;text-indent:.42em;
   color:var(--gold-deep);margin-bottom:14px;font-weight:600;
 }
-.hero-title{font-family:var(--kai);font-size:24px;letter-spacing:.5em;text-indent:.5em;color:var(--rose-deep);margin-bottom:34px}
+.hero-title{font-family:var(--kai);font-size:24px;letter-spacing:.5em;text-indent:.5em;color:var(--rose-deep);margin-bottom:22px}
 .names{
   font-family:var(--serif);font-weight:600;white-space:nowrap;
   font-size:clamp(28px,9vw,42px);letter-spacing:.06em;color:var(--ink);
@@ -109,13 +109,13 @@ img{display:block;max-width:100%}
 }
 .names-sub{font-family:var(--latin);font-size:11px;letter-spacing:.34em;text-indent:.34em;color:var(--gold-deep);margin-top:14px}
 .hero-date{
-  display:inline-block;max-width:100%;margin-top:30px;padding:8px 16px;
+  display:inline-block;max-width:100%;margin-top:20px;padding:8px 16px;
   border:1px solid rgba(201,160,99,.55);border-radius:999px;
   font-size:13px;letter-spacing:.08em;color:var(--ink);
   background:rgba(255,253,251,.5);white-space:nowrap;
 }
 .hero-date b{color:var(--rose-deep);font-weight:600}
-.hero-note{margin-top:22px;font-family:var(--kai);font-size:15px;letter-spacing:.28em;text-indent:.28em;color:var(--ink-soft)}
+.hero-note{margin-top:12px;font-family:var(--kai);font-size:15px;letter-spacing:.28em;text-indent:.28em;color:var(--ink-soft)}
 /* 花枝 */
 .branch{position:absolute;pointer-events:none;z-index:2}
 .branch.tl{width:118px;top:20px;left:-6px;opacity:.9}
@@ -264,6 +264,58 @@ section.block{padding:26px 0}
 .orna .ln{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .orna svg{width:16px;height:16px}
 
+/* ============ 开屏（点击开启） ============ */
+#opener{
+  position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -8%, rgba(244,196,204,.5), transparent 60%),
+    radial-gradient(ellipse 110% 70% at 50% 112%, rgba(232,205,160,.4), transparent 60%),
+    linear-gradient(180deg,var(--bg),var(--bg-deep));
+  cursor:pointer;transition:opacity .9s ease, visibility .9s;
+}
+#opener.open{opacity:0;visibility:hidden}
+#opener .seal{position:static;transform:rotate(-7deg);margin-bottom:26px}
+#opener .op-names{font-size:clamp(30px,9vw,40px);font-weight:600;letter-spacing:.08em;color:var(--ink);display:flex;align-items:center;gap:12px;white-space:nowrap}
+#opener .op-names .amp{font-size:.55em;color:var(--rose)}
+#opener .op-title{margin-top:16px;font-family:var(--kai);font-size:22px;letter-spacing:.5em;text-indent:.5em;color:var(--rose-deep)}
+#opener .op-date{margin-top:12px;font-size:13px;letter-spacing:.14em;color:var(--ink-soft)}
+#opener .op-hint{
+  margin-top:52px;font-family:var(--kai);font-size:15px;letter-spacing:.3em;text-indent:.3em;
+  color:var(--rose-deep);display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+#opener .op-ring{
+  width:54px;height:54px;border-radius:50%;border:1.5px solid rgba(161,78,102,.55);
+  display:flex;align-items:center;justify-content:center;
+  animation:pulse 2s ease-in-out infinite;
+}
+#opener .op-ring::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--rose)}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.22);opacity:1}}
+.render #opener{display:none}
+
+/* ============ 音乐按钮 ============ */
+#music-btn{
+  position:fixed;top:14px;right:14px;z-index:40;width:42px;height:42px;border-radius:50%;
+  border:1px solid rgba(201,160,99,.6);background:rgba(255,253,251,.88);
+  box-shadow:0 4px 14px rgba(161,78,102,.18);
+  display:flex;align-items:center;justify-content:center;color:var(--gold-deep);
+  cursor:pointer;transition:transform .15s ease;
+}
+#music-btn:active{transform:scale(.92)}
+#music-btn svg{width:19px;height:19px}
+#music-btn.playing svg{animation:spin 3.2s linear infinite}
+#music-btn.playing{color:var(--rose-deep);border-color:rgba(196,115,138,.65)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 首页合照 */
+.hero-photo{
+  width:62%;margin:0 auto 20px;aspect-ratio:3/4;
+  border-radius:170px 170px 10px 10px;overflow:hidden;position:relative;
+  border:1px solid rgba(201,160,99,.65);
+  box-shadow:0 0 0 5px rgba(255,253,251,.55), 0 0 0 6px rgba(201,160,99,.35), 0 14px 34px rgba(161,78,102,.22);
+}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 /* ============ 入场动画 ============ */
 .load{opacity:0;animation:fadeUp 1.1s cubic-bezier(.22,.61,.36,1) both}
 .load.d1{animation-delay:.15s}.load.d2{animation-delay:.35s}.load.d3{animation-delay:.55s}
@@ -280,6 +332,16 @@ section.block{padding:26px 0}
 </head>
 <body>
 <div class="glow g1"></div><div class="glow g2"></div>
+<button id="music-btn" aria-label="背景音乐开关">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
+<div id="opener">
+  <div class="seal">囍</div>
+  <div class="op-names"><span id="op-groom"></span><span class="amp">♥</span><span id="op-bride"></span></div>
+  <div class="op-title">婚礼邀请函</div>
+  <div class="op-date" id="op-date"></div>
+  <div class="op-hint"><span class="op-ring"></span>轻触开启请帖</div>
+</div>
 <div id="petals"></div>
 
 <!-- 通用 SVG 花枝定义 -->
@@ -332,6 +394,7 @@ section.block{padding:26px 0}
   <header class="hero">
     <div class="arch">
       <div class="seal load">囍</div>
+      <div class="hero-photo load d1"><img id="i-heroimg" alt="我们的合照" src=""></div>
       <svg class="branch tl load d3"><use href="#sym-branch"/></svg>
       <svg class="branch tr load d3"><use href="#sym-branch"/></svg>
       <svg class="branch bl load d4"><use href="#sym-branch"/></svg>
@@ -484,6 +547,27 @@ $('#i-vsub').innerHTML = `${WEDDING.weekday} · ${WEDDING.lunarLine} · <b>${WED
 $('#i-hotel').textContent = WEDDING.hotel;
 $('#i-hall').textContent = WEDDING.hall;
 $('#i-addr').textContent = WEDDING.address;
+
+/* 首页合照 */
+$('#i-heroimg').src = WEDDING.heroPhoto.src;
+$('#i-heroimg').style.objectPosition = WEDDING.heroPhoto.pos || '50% 22%';
+
+/* 开屏 + 背景音乐 */
+$('#op-groom').textContent = WEDDING.groom;
+$('#op-bride').textContent = WEDDING.bride;
+$('#op-date').textContent = `${WEDDING.dateLine} · ${WEDDING.hotel}`;
+const bgm = new Audio(WEDDING.bgm); bgm.loop = true;
+const btn = $('#music-btn');
+function toggleMusic() {
+  if (bgm.paused) { bgm.play().catch(() => {}); btn.classList.add('playing'); }
+  else { bgm.pause(); btn.classList.remove('playing'); }
+}
+$('#opener').addEventListener('click', function once() {
+  $('#opener').classList.add('open');
+  bgm.play().then(() => btn.classList.add('playing')).catch(() => {});
+  $('#opener').removeEventListener('click', once);
+});
+btn.addEventListener('click', toggleMusic);
 $('#i-map-amap').href = WEDDING.mapAmap;
 $('#i-map-tx').href = WEDDING.mapTencent;
 $('#i-fnames').innerHTML = `${WEDDING.groom}<span>♥</span>${WEDDING.bride}`;
