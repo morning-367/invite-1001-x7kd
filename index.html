@@ -577,7 +577,7 @@ $('#op-date').textContent = `${WEDDING.dateLine} · ${WEDDING.hotel}`;
 let bgm = null;
 const btn = $('#music-btn');
 if (WEDDING.bgm) {
-  bgm = new Audio(WEDDING.bgm); bgm.loop = true;
+  bgm = new Audio(WEDDING.bgm); bgm.loop = true; bgm.preload = 'none';
   function toggleMusic() {
     if (bgm.paused) { bgm.play().catch(() => {}); btn.classList.add('playing'); }
     else { bgm.pause(); btn.classList.remove('playing'); }
