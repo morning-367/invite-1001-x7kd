@@ -172,23 +172,39 @@ section.block{padding:26px 0}
 .cd-note b{color:var(--rose-deep);font-weight:600}
 
 /* 照片故事长廊 */
-.story{display:flex;flex-direction:column;gap:36px}
-.st-item{width:90%}
+.story{display:flex;flex-direction:column;gap:74px}
+.story-intro{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 34px;font-size:12.5px;letter-spacing:.18em;color:var(--ink-soft)}
+.story-intro::before,.story-intro::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.st-item{width:88%}
 .st-item:nth-child(even){margin-left:auto;transform:rotate(1.1deg)}
 .st-item:nth-child(odd){transform:rotate(-1.1deg)}
 .st-frame{
-  position:relative;background:#FFFDFB;padding:8px 8px 11px;
+  position:relative;background:#FFFDFB;padding:10px 10px 16px;
   border:1px solid rgba(201,160,99,.4);border-radius:6px;
-  box-shadow:0 12px 30px rgba(161,78,102,.14);
+  box-shadow:0 14px 36px rgba(161,78,102,.15);
 }
-.st-frame .ph{position:relative;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#F7E3E0,#EFD2D4);height:300px}
-.st-frame .ph.wide{height:226px}
+.st-badge{
+  position:absolute;top:-22px;left:-14px;width:48px;height:48px;border-radius:50%;
+  background:#FFFDFB;border:1px solid var(--gold);
+  box-shadow:0 0 0 3px #FFFDFB, 0 0 0 4px rgba(201,160,99,.4), 0 8px 16px rgba(161,78,102,.16);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--kai);font-size:21px;color:var(--rose-deep);
+  transform:rotate(-9deg);z-index:2;
+}
+.tape{
+  position:absolute;top:-10px;right:22px;width:64px;height:20px;border-radius:2px;z-index:2;
+  background:linear-gradient(180deg,rgba(242,196,204,.78),rgba(242,196,204,.55));
+  box-shadow:0 1px 3px rgba(161,78,102,.18);
+  transform:rotate(4deg);
+}
+.st-item:nth-child(even) .tape{transform:rotate(-4deg)}
+.st-frame .ph{position:relative;border-radius:3px;overflow:hidden;background:linear-gradient(160deg,#F7E3E0,#EFD2D4);height:296px}
+.st-frame .ph.wide{height:220px}
 .st-frame .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.st-cap{margin-top:11px;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
-.st-cap .lb{font-family:var(--kai);font-size:15.5px;color:var(--rose-deep);letter-spacing:.06em;white-space:nowrap}
-.st-cap .lb b{color:var(--gold-deep);font-weight:600;margin-right:6px}
-.st-cap .nt{font-size:11px;color:var(--ink-soft);letter-spacing:.03em;text-align:right}
-.story-intro{margin:-6px 0 22px;font-size:12.5px;letter-spacing:.14em;color:var(--ink-soft)}
+.st-cap{margin-top:15px}
+.st-cap .lb{font-family:var(--kai);font-size:16.5px;color:var(--rose-deep);letter-spacing:.14em;text-align:center}
+.st-cap .lb b{color:var(--gold-deep);font-weight:600;margin-right:8px}
+.st-cap .nt{margin-top:7px;font-size:11.5px;color:var(--ink-soft);letter-spacing:.12em;text-align:center}
 
 /* 两日宴席 */
 .days{display:flex;flex-direction:column;gap:14px;text-align:left}
@@ -513,8 +529,10 @@ $('#i-sign').textContent = `—— ${WEDDING.groom} & ${WEDDING.bride} 敬上`;
 $('#i-story').innerHTML = WEDDING.story.map(p => `
   <div class="st-item">
     <div class="st-frame">
+      <div class="st-badge">${p.chapter}</div>
+      <div class="tape"></div>
       <div class="ph${p.wide ? ' wide' : ''}"><img loading="lazy" alt="${p.title}" src="${p.src}" style="object-position:${p.pos || '50% 20%'}"></div>
-      <div class="st-cap"><div class="lb"><b>${p.chapter}</b>${p.title}</div><div class="nt">${p.note}</div></div>
+      <div class="st-cap"><div class="lb">${p.title}</div><div class="nt">${p.note}</div></div>
     </div>
   </div>`).join('');
 
@@ -556,18 +574,23 @@ $('#i-heroimg').style.objectPosition = WEDDING.heroPhoto.pos || '50% 22%';
 $('#op-groom').textContent = WEDDING.groom;
 $('#op-bride').textContent = WEDDING.bride;
 $('#op-date').textContent = `${WEDDING.dateLine} · ${WEDDING.hotel}`;
-const bgm = new Audio(WEDDING.bgm); bgm.loop = true;
+let bgm = null;
 const btn = $('#music-btn');
-function toggleMusic() {
-  if (bgm.paused) { bgm.play().catch(() => {}); btn.classList.add('playing'); }
-  else { bgm.pause(); btn.classList.remove('playing'); }
+if (WEDDING.bgm) {
+  bgm = new Audio(WEDDING.bgm); bgm.loop = true;
+  function toggleMusic() {
+    if (bgm.paused) { bgm.play().catch(() => {}); btn.classList.add('playing'); }
+    else { bgm.pause(); btn.classList.remove('playing'); }
+  }
+  btn.addEventListener('click', toggleMusic);
+} else {
+  btn.style.display = 'none';
 }
 $('#opener').addEventListener('click', function once() {
   $('#opener').classList.add('open');
-  bgm.play().then(() => btn.classList.add('playing')).catch(() => {});
+  if (bgm) { bgm.play().then(() => btn.classList.add('playing')).catch(() => {}); }
   $('#opener').removeEventListener('click', once);
 });
-btn.addEventListener('click', toggleMusic);
 $('#i-map-amap').href = WEDDING.mapAmap;
 $('#i-map-tx').href = WEDDING.mapTencent;
 $('#i-fnames').innerHTML = `${WEDDING.groom}<span>♥</span>${WEDDING.bride}`;
