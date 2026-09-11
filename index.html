@@ -577,12 +577,22 @@ $('#op-date').textContent = `${WEDDING.dateLine} · ${WEDDING.hotel}`;
 let bgm = null;
 const btn = $('#music-btn');
 if (WEDDING.bgm) {
-  bgm = new Audio(WEDDING.bgm); bgm.loop = true;
+  bgm = new Audio(WEDDING.bgm); bgm.loop = true; bgm.volume = 1;
+  function tryPlay() {
+    if (!btn.classList.contains('playing')) return;
+    bgm.play().catch(() => {});
+  }
   function toggleMusic() {
-    if (bgm.paused) { bgm.play().catch(() => {}); btn.classList.add('playing'); }
+    if (bgm.paused) { bgm.play().then(() => btn.classList.add('playing')).catch(() => {}); }
     else { bgm.pause(); btn.classList.remove('playing'); }
   }
   btn.addEventListener('click', toggleMusic);
+  // 微信内置浏览器兼容：桥就绪后补一次播放
+  document.addEventListener('WeixinJSBridgeReady', () => { if (!$('#opener').classList.contains('open')) return; bgm.play().catch(() => {}); }, false);
+  // 兜底：开启请帖后，任何触摸/点击都自动补救播放（已正常播放则无效果）
+  ['touchstart', 'click'].forEach(ev =>
+    document.addEventListener(ev, () => { if ($('#opener').classList.contains('open')) tryPlay(); }, { passive: true })
+  );
 } else {
   btn.style.display = 'none';
 }
